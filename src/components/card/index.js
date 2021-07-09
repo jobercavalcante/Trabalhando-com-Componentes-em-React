@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import Button from './../button/index';
 
 const Card = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    console.log(total);
     total < 0 && setTotal(0);
   }, [total]);
+
+  function operacao(operador) {
+    setTotal(eval(`${total} ${operador} 1`));
+  }
 
   return (
     <div className="card mb-4">
       <div className="card-header">Featured</div>
       <div className="card-body">
         <p>Meu texto do card</p>
-        <button className="btn btn-success" onClick={() => setTotal(total + 1)}>
-          Adicionar
-        </button>
-        <button
+        <Button onClick={() => operacao('+')}>Adicionar</Button>
+        <Button
           className="btn btn-danger"
           disabled={total <= 0}
-          onClick={() => setTotal(total - 1)}
+          onClick={() => operacao('-')}
         >
           subtrair
-        </button>
+        </Button>
         <p>{total}</p>
       </div>
     </div>
